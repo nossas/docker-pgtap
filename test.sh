@@ -4,7 +4,7 @@ HOST=
 PORT=5432
 USER="postgres"
 PASSWORD=
-TESTS="/t/*.sql"
+TESTS="/t/**/**/.sql"
 
 function usage() { echo "Usage: $0 -h host -d database -p port -u username -w password -t tests" 1>&2; exit 1; }
 
@@ -43,7 +43,7 @@ fi
 
 echo "Running tests: $TESTS"
 # install pgtap
-PGPASSWORD=$PASSWORD psql -h $HOST -p $PORT -d $DATABASE -U $USER -f /pgtap/sql/pgtap.sql > /dev/null 2>&1
+PGPASSWORD=$PASSWORD psql -c -h $HOST -p $PORT -d $DATABASE -U $USER -f /pgtap/sql/pgtap.sql > /dev/null 2>&1
 
 rc=$?
 # exit if pgtap failed to install
